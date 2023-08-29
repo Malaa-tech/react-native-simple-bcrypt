@@ -6,6 +6,16 @@ Simple/Fast bcrypt ios/android bindings for react native
 npm install react-native-simple-bcrypt
 ```
 
+install pods
+```sh
+cd ios && pod install
+```
+
+if in expo managed projects do a prebuild 
+```sh
+expo prebuild
+```
+
 ## Usage
 
 ```js
