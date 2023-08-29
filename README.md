@@ -1,5 +1,5 @@
 # react-native-simple-bcrypt
-Native bindings for bcrypt
+Simple/Fast bcrypt ios/android bindings for react native
 ## Installation
 
 ```sh
