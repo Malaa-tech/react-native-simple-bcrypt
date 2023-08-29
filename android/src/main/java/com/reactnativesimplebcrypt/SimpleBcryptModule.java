@@ -8,6 +8,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.module.annotations.ReactModule;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+
 @ReactModule(name = SimpleBcryptModule.NAME)
 public class SimpleBcryptModule extends ReactContextBaseJavaModule {
     public static final String NAME = "SimpleBcrypt";
@@ -23,11 +26,15 @@ public class SimpleBcryptModule extends ReactContextBaseJavaModule {
     }
 
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
-    public void multiply(double a, double b, Promise promise) {
-        promise.resolve(a * b);
+    public void compare(String plainText, String hashed, Promise promise) {
+        try {
+            boolean result = BCrypt.checkpw(plainText, hashed);
+
+            promise.resolve(result);
+        } catch (Exception e) {
+            promise.reject("Error in comparison", e);
+        }
     }
 
 }

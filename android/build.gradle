@@ -126,6 +126,8 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
+  implementation 'org.mindrot:jbcrypt:0.4' // bcrypt
+
 // From node_modules
 }
 
