@@ -1,7 +1,7 @@
 {
   "name": "react-native-simple-bcrypt",
   "version": "0.1.0",
-  "description": "test",
+  "description": "Simple/Fast/Native Bcrypt bindings for react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -37,6 +37,9 @@
   },
   "keywords": [
     "react-native",
+    "bcrypt",
+    "native",
+    "hash",
     "ios",
     "android"
   ],
