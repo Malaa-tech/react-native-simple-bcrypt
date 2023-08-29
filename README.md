@@ -9,11 +9,13 @@ npm install react-native-simple-bcrypt
 ## Usage
 
 ```js
-import { multiply } from "react-native-simple-bcrypt";
+import { compare } from "react-native-simple-bcrypt";
 
 // ...
 
-const result = await multiply(3, 7);
+compare(plainText, hashed).then((isMatched) => {
+  console.log(isMatched);
+});
 ```
 
 ## Contributing
