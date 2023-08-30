@@ -3,7 +3,12 @@ Simple/Fast/Native Bcrypt bindings for react native
 ## Installation
 
 ```sh
-npm install react-native-simple-bcrypt
+npm install react-native-simple-bcrypt 
+```
+
+or using yarn
+```sh
+yarn add react-native-simple-bcrypt 
 ```
 
 install pods
