@@ -24,13 +24,18 @@ expo prebuild
 ## Usage
 
 ```js
-import { compare } from "react-native-simple-bcrypt";
+import { compare, hash } from "react-native-simple-bcrypt";
 
 // ...
 
 compare(plainText, hashed).then((isMatched) => {
   console.log(isMatched);
 });
+
+hash(plainTextToBeHashed, rounds).then((res) => {
+   console.log(res);
+});
+
 ```
 
 ## Contributing
