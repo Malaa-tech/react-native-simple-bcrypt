@@ -25,6 +25,17 @@ public class SimpleBcryptModule extends ReactContextBaseJavaModule {
         return NAME;
     }
 
+    @ReactMethod
+    public void hash(String plainText, int rounds, Promise promise) {
+        try {
+            String hashed = BCrypt.hashpw(plainText, BCrypt.gensalt(rounds));
+
+            promise.resolve(hashed);
+        } catch (Exception e) {
+            promise.reject("Error in hashing", e);
+        }
+    }
+
 
     @ReactMethod
     public void compare(String plainText, String hashed, Promise promise) {

@@ -49,38 +49,47 @@ export default function App() {
           title="Generate"
           disabled={isHashing}
           onPress={() => {
-            setIsHashing(true);
-            const t1 = Date.now();
-            hash(plainTextToBeHashed, rounds).then((res) => {
-              setHashResult(`${res}`);
-              setIsHashing(false);
-              setHashResultTime(Date.now() - t1);
-            });
+            setTimeout(() => {
+              setIsHashing(true);
+              const t1 = Date.now();
+              hash(plainTextToBeHashed, rounds).then((res) => {
+                setHashResult(`${res}`);
+                setIsHashing(false);
+                setHashResultTime(Date.now() - t1);
+              });
+            })
           }}
         />
 
         {hashResult && (
           <View
             style={{
-              flexDirection: 'row',
               alignItems: 'center',
-              justifyContent: 'center',
             }}
           >
-            <Text style={{ ...styles.result, maxWidth: '80%' }}>
-              {hashResult} {`(${hashResultTime}ms)`}
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                Clipboard.setString(hashResult);
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              <Text
-                style={{ ...styles.result, color: 'blue', paddingStart: 10 }}
-              >
-                Copy
+              <Text style={{ ...styles.result, maxWidth: '80%' }}>
+                {hashResult}
               </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  Clipboard.setString(hashResult);
+                }}
+              >
+                <Text
+                  style={{ ...styles.result, color: 'blue', paddingStart: 10 }}
+                >
+                  Copy
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <Text>{`(${hashResultTime}ms)`}</Text>
           </View>
         )}
       </View>
@@ -116,11 +125,9 @@ export default function App() {
           }}
         />
 
-        <Text style={styles.result}>
-          Is Matched?: {matchResult}{' '}
-          {checkResultTime > 0 && `(${checkResultTime}ms)`}
-        </Text>
+        <Text style={styles.result}>Is Matched?: {matchResult} </Text>
       </View>
+      <Text>{checkResultTime > 0 && `(${checkResultTime}ms)`}</Text>
     </View>
   );
 }
@@ -154,7 +161,8 @@ const styles = StyleSheet.create({
     height: 1,
     width: '100%',
     backgroundColor: 'gray',
-    marginVertical: 20,
+    marginTop: 40,
+    marginBottom: 20,
     opacity: 0.3,
   },
   box: {
