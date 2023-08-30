@@ -21,6 +21,6 @@ export function compare(plainText: string, hashed: string): Promise<number> {
   return SimpleBcrypt.compare(plainText, hashed);
 }
 
-export function hash(plainText: string, saltRounds: number): Promise<string> {
+export function hash(plainText: string, saltRounds = 12): Promise<string> {
   return SimpleBcrypt.hash(plainText, saltRounds);
 }

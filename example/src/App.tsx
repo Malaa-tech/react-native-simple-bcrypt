@@ -52,12 +52,16 @@ export default function App() {
             setTimeout(() => {
               setIsHashing(true);
               const t1 = Date.now();
-              hash(plainTextToBeHashed, rounds).then((res) => {
-                setHashResult(`${res}`);
-                setIsHashing(false);
-                setHashResultTime(Date.now() - t1);
-              });
-            })
+              hash(plainTextToBeHashed, rounds)
+                .then((res) => {
+                  setHashResult(`${res}`);
+                  setIsHashing(false);
+                  setHashResultTime(Date.now() - t1);
+                })
+                .catch(() => {
+                  setIsHashing(false);
+                });
+            });
           }}
         />
 
@@ -117,11 +121,15 @@ export default function App() {
           onPress={() => {
             setIsChecking(true);
             const t1 = Date.now();
-            compare(plainText, hashed).then((res) => {
-              setMatchResult(`${res}`);
-              setIsChecking(false);
-              setCheckResultTime(Date.now() - t1);
-            });
+            compare(plainText, hashed)
+              .then((res) => {
+                setMatchResult(`${res}`);
+                setIsChecking(false);
+                setCheckResultTime(Date.now() - t1);
+              })
+              .catch(() => {
+                setIsChecking(false);
+              });
           }}
         />
 
