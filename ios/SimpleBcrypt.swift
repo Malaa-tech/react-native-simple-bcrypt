@@ -38,12 +38,12 @@ class SimpleBcrypt: NSObject {
         }
     }
     
-    /// Compares a plaintext and a hashed string.
-    /// - Parameters:
-    ///   - plainText: The plaintext string.
-    ///   - hashed: The hashed string.
-    ///   - resolver: Promise resolve block.
-    ///   - rejecter: Promise reject block.
+    ///  Compares a plaintext and a hashed string.
+    /// -  Parameters:
+    ///   -  plainText: The plaintext string.
+    ///   -  hashed: The hashed string.
+    ///   -  resolver: Promise resolve block.
+    ///   -  rejecter: Promise reject block.
     @objc
     func compare(_ plainText: String, hashed: String, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
         // Validate input
