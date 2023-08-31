@@ -24,8 +24,8 @@ class SimpleBcrypt: NSObject {
             return
         }
         
-        guard rounds >= 4 && rounds <= 31 else {
-            rejecter("error", "Invalid number of rounds", nil)
+        guard rounds >= 4 && rounds <= 30 else {
+            rejecter("error", "Invalid number of rounds, should be between 4 and 30", nil)
             return
         }
         
