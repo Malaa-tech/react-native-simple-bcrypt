@@ -53,12 +53,13 @@ export default function App() {
               setIsHashing(true);
               const t1 = Date.now();
               hash(plainTextToBeHashed, rounds)
-                .then((res) => {
+                .then((res: string) => {
                   setHashResult(`${res}`);
                   setIsHashing(false);
                   setHashResultTime(Date.now() - t1);
                 })
-                .catch(() => {
+                .catch((e: Error) => {
+                  console.log(e);
                   setIsHashing(false);
                 });
             });
@@ -122,12 +123,13 @@ export default function App() {
             setIsChecking(true);
             const t1 = Date.now();
             compare(plainText, hashed)
-              .then((res) => {
+              .then((res: boolean) => {
                 setMatchResult(`${res}`);
                 setIsChecking(false);
                 setCheckResultTime(Date.now() - t1);
               })
-              .catch(() => {
+              .catch((e: Error) => {
+                console.log(e);
                 setIsChecking(false);
               });
           }}
