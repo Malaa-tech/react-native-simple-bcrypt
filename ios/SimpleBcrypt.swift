@@ -10,21 +10,20 @@ import BCrypt
 
 @objc(SimpleBcrypt)
 class SimpleBcrypt: NSObject {
-  @objc
+    @objc
     func hash(_ plainText: String, rounds: Int, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
-        print("Hashing")
         do {
-          let salt = try BCrypt.Salt(rounds: rounds)
-          let result = try BCrypt.Hash(plainText, salt: BCrypt.Salt())
-          resolver(result)
+            let salt = try BCrypt.Salt(rounds: rounds)
+            let result = try BCrypt.Hash(plainText, salt: salt)
+            resolver(result)
         } catch {
-//            rejecter("error", "error while hashing")
+            rejecter("error", "error while hashing", error)
         }
     }
     
-  @objc
-  func compare(_ plainText: String, hashed: String, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
-      let result = BCrypt.Check(plainText, hashed: hashed)
-      resolver(result)
-  }
+    @objc
+    func compare(_ plainText: String, hashed: String, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
+        let result = BCrypt.Check(plainText, hashed: hashed)
+        resolver(result)
+    }
 }
