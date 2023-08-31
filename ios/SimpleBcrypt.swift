@@ -10,6 +10,12 @@ import BCrypt
 
 @objc(SimpleBcrypt)
 class SimpleBcrypt: NSObject {
+    /// Hashes a plaintext string using bcrypt.
+    /// - Parameters:
+    ///   - plainText: The string to be hashed.
+    ///   - rounds: The cost factor for the bcrypt algorithm.
+    ///   - resolver: Promise resolve block.
+    ///   - rejecter: Promise reject block.
     @objc
     func hash(_ plainText: String, rounds: Int, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
         do {
@@ -21,6 +27,12 @@ class SimpleBcrypt: NSObject {
         }
     }
     
+    /// Compares a plaintext and a hashed string.
+    /// - Parameters:
+    ///   - plainText: The plaintext string.
+    ///   - hashed: The hashed string.
+    ///   - resolver: Promise resolve block.
+    ///   - rejecter: Promise reject block.
     @objc
     func compare(_ plainText: String, hashed: String, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
         let result = BCrypt.Check(plainText, hashed: hashed)
