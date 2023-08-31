@@ -25,6 +25,13 @@ public class SimpleBcryptModule extends ReactContextBaseJavaModule {
         return NAME;
     }
 
+    /**
+     * Hashes a plaintext string using bcrypt.
+     *
+     * @param plainText The string to be hashed.
+     * @param rounds    The cost factor for the bcrypt algorithm.
+     * @param promise   Promise resolve/reject block.
+     */
     @ReactMethod
     public void hash(String plainText, int rounds, Promise promise) {
         try {
@@ -36,7 +43,13 @@ public class SimpleBcryptModule extends ReactContextBaseJavaModule {
         }
     }
 
-
+    /**
+     * Compares a plaintext and a hashed string.
+     *
+     * @param plainText The plaintext string.
+     * @param hashed    The hashed string.
+     * @param promise   Promise resolve/reject block.
+     */
     @ReactMethod
     public void compare(String plainText, String hashed, Promise promise) {
         try {
