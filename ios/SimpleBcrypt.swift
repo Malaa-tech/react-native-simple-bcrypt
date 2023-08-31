@@ -18,12 +18,23 @@ class SimpleBcrypt: NSObject {
     ///   - rejecter: Promise reject block.
     @objc
     func hash(_ plainText: String, rounds: Int, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
+        // Validate input
+        guard !plainText.isEmpty else {
+            rejecter("error", "Plaintext should not be empty", nil)
+            return
+        }
+        
+        guard rounds >= 4 && rounds <= 31 else {
+            rejecter("error", "Invalid number of rounds", nil)
+            return
+        }
+        
         do {
             let salt = try BCrypt.Salt(rounds: rounds)
             let result = try BCrypt.Hash(plainText, salt: salt)
             resolver(result)
         } catch {
-            rejecter("error", "error while hashing", error)
+            rejecter("error", "An error occurred while hashing", error)
         }
     }
     
@@ -35,7 +46,14 @@ class SimpleBcrypt: NSObject {
     ///   - rejecter: Promise reject block.
     @objc
     func compare(_ plainText: String, hashed: String, resolver: @escaping RCTPromiseResolveBlock, rejecter: @escaping RCTPromiseRejectBlock) {
-        let result = BCrypt.Check(plainText, hashed: hashed)
-        resolver(result)
+        // Validate input
+        guard !plainText.isEmpty, !hashed.isEmpty else {
+            rejecter("error", "Plaintext or hashed text should not be empty", nil)
+            return
+        }
+        
+        let isMatching = BCrypt.Check(plainText, hashed: hashed)
+        
+        resolver(isMatching)
     }
 }
