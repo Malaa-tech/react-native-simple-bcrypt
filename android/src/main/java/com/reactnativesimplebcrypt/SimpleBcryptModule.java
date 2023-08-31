@@ -10,7 +10,6 @@ import com.facebook.react.module.annotations.ReactModule;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-
 @ReactModule(name = SimpleBcryptModule.NAME)
 public class SimpleBcryptModule extends ReactContextBaseJavaModule {
     public static final String NAME = "SimpleBcrypt";
@@ -34,12 +33,22 @@ public class SimpleBcryptModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void hash(String plainText, int rounds, Promise promise) {
+        // Validate input
+        if (plainText == null || plainText.isEmpty()) {
+            promise.reject("Error", "Plaintext should not be empty");
+            return;
+        }
+
+        if (rounds < 4 || rounds > 30) {
+            promise.reject("Error", "Invalid number of rounds, should be between 4 and 30");
+            return;
+        }
+
         try {
             String hashed = BCrypt.hashpw(plainText, BCrypt.gensalt(rounds));
-
             promise.resolve(hashed);
         } catch (Exception e) {
-            promise.reject("Error in hashing", e);
+            promise.reject("An error occurred while hashing", e);
         }
     }
 
@@ -52,9 +61,14 @@ public class SimpleBcryptModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void compare(String plainText, String hashed, Promise promise) {
+        // Validate input
+        if (plainText == null || plainText.isEmpty() || hashed == null || hashed.isEmpty()) {
+            promise.reject("Error", "Plaintext or hashed text should not be empty");
+            return;
+        }
+
         try {
             boolean result = BCrypt.checkpw(plainText, hashed);
-
             promise.resolve(result);
         } catch (Exception e) {
             promise.reject("Error in comparison", e);
