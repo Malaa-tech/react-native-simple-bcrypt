@@ -1,5 +1,9 @@
+# :warning: We are sorry but we are not maintaing this project anymore.
+
+
 # react-native-simple-bcrypt
 Simple/Fast/Native Bcrypt bindings for react native
+
 ## Installation
 
 ```sh
